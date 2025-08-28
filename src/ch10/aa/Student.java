@@ -1,0 +1,177 @@
+package ch10.aa;
+
+public class Student {
+	private String name;
+	private int sno;
+	private String major;
+	private int[] score;
+	private String[] grade;
+	private double[] point;
+//	private int java;
+//	private int db;
+//	private int python;
+	private double avg;
+	private int rank = 1;
+	private String adv;
+
+	public Student() {}
+	
+	public void setAdv() {
+		this.adv = this.avg>85?"장학급 지급":" ";
+	}
+	
+	public void setGrade() {
+		for(int i = 0; i < score.length; i++) {
+			if(score[i]>=95) {
+				grade[i] = "A+";
+				point[i] = 4.5;
+			}
+			else if(score[i]>=90) {
+				grade[i] = "A";
+				point[i] = 4.0;
+			}
+			else if(score[i]>=85) {
+				grade[i] = "B+";
+				point[i] = 3.5;
+			}
+			else if(score[i]>=80) {
+				grade[i] = "B";
+				point[i] = 3.0;
+			}
+			else if(score[i]>=75) {
+				grade[i] = "C+";
+				point[i] = 2.5;
+			}
+			else if(score[i]>=70) {
+				grade[i] = "C";
+				point[i] = 2.0;
+				}
+			else {
+				grade[i] = "F";
+				point[i] = 0.0;
+			}
+		}
+	}
+
+	public Student(String name, int sno, String major, int[] score) {
+		super();
+		this.name = name;
+		this.sno = sno;
+		this.major = major;
+		this.score = score;
+//		this.java = java;
+//		this.db = db;
+//		this.python = python;
+		setAvg();
+		setAdv();
+		grade = new String[3];
+		point = new double[3];
+		setGrade();
+	}
+
+	@Override
+	public String toString() {
+		String scoreStr = "";
+		for(int i = 0; i < score.length; i++) {
+			scoreStr = score[i]+" ";
+		}
+		return  name + " " + sno + " " + major + " " + scoreStr + avg + " " + rank +" "+adv ;
+	}
+
+	public int[] getScore() {
+		return score;
+	}
+
+	public void setScore(int[] score) {
+		this.score = score;
+	}
+
+	public double getAvg() {
+		return avg;
+	}
+
+	public void setAvg() {
+		int sum = 0;
+		for(int i = 0 ; i < score.length ; i++) {
+			sum += score[i];
+		}
+		this.avg = sum/3.0;
+	}
+
+	public void setRank(Student otherStudent) {
+		if(this.avg < otherStudent.avg) {
+			rank++;
+		}
+	}
+	
+	public int getRank() {
+		return rank;
+	}
+
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+//	public int getJava() {
+//		return java;
+//	}
+//
+//	public void setJava(int java) {
+//		this.java = java;
+//	}
+//
+//	public int getDb() {
+//		return db;
+//	}
+//
+//	public void setDb(int db) {
+//		this.db = db;
+//	}
+//
+//	public int getPython() {
+//		return python;
+//	}
+//
+//	public void setPython(int python) {
+//		this.python = python;
+//	}
+	public void display() {
+		String[] subject = {"자바", "DB", "파이썬"};
+		System.out.println("이름 : "+name);
+		System.out.println("학번 : "+sno);
+		System.out.println("전공 : "+major);
+		System.out.println("성적처리 결과");
+		System.out.println("과목\tscore\tgrade\t학점");
+		double sum = 0.0;
+//		System.out.println("자바\t"+score[0]+"\t"+grade[0]+"\t"+point[0]);
+//		System.out.println("DB\t"+score[1]+"\t"+grade[1]+"\t"+point[1]);
+//		System.out.println("파이썬\t"+score[2]+"\t"+grade[2]+"\t"+point[2]);
+		for(int i = 0; i<score.length ; i++) {
+			System.out.println(subject[i]+"\t"+score[i]+"\t"+grade[i]+"\t"+point[i]);
+			sum += point[i];
+		}
+		System.out.println("학점평균 : "+(sum/3));
+	}
+	
+	
+}
