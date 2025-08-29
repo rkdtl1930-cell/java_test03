@@ -99,9 +99,11 @@ public class Student {
 	}
 
 	public void setRank(Student otherStudent) {
+		//int rank = 1;
 		if(this.avg < otherStudent.avg) {
 			rank++;
 		}
+		//this.rank = rank;
 	}
 	
 	public int getRank() {
